@@ -2,8 +2,38 @@ import logoHeader from "../../assets/img/header-logo.png";
 import MenuHeader from "../MenuHeader";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {showSearch} from "../../features/header/headerSlice";
+import {setQuerySearch} from "../../features/catalog/catalogSlice";
+import { useNavigate } from 'react-router-dom'
 
 export default function Header() {
+  const {search} = useSelector(state => state.header);
+  const {params} = useSelector(state => state.catalog);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handlerClick = event => {
+    if (params.q) {
+      dispatch(showSearch());
+      navigate("/catalog.html");
+    } else {
+      dispatch(showSearch());
+    }
+  };
+
+  const handlerSubmit = event => {
+    event.preventDefault();
+
+    dispatch(showSearch());
+    navigate("/catalog.html");
+  };
+
+  const handlerChange = event => {
+    const val = event.target.value;
+    dispatch(setQuerySearch(val));
+  }
+
   return (
     <header className="container">
       <div className="row">
@@ -16,15 +46,17 @@ export default function Header() {
               <MenuHeader/>
               <div>
                 <div className="header-controls-pics">
-                  <div data-id="search-expander" className="header-controls-pic header-controls-search"></div>
+                  <div data-id="search-expander" className="header-controls-pic header-controls-search" onClick={handlerClick}></div>
                   <div className="header-controls-pic header-controls-cart">
                     <div className="header-controls-cart-full">1</div>
                     <div className="header-controls-cart-menu"></div>
                   </div>
                 </div>
-                <form data-id="search-form" className="header-controls-search-form form-inline invisible">
-                  <input className="form-control" placeholder="Поиск"/>
-                </form>
+                {search && (
+                  <form data-id="search-form" className="header-controls-search-form form-inline" onSubmit={handlerSubmit}>
+                    <input className="form-control" placeholder="Поиск" onChange={handlerChange}/>
+                  </form>
+                )}
               </div>
             </div>
           </nav>
