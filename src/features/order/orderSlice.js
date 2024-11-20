@@ -22,10 +22,12 @@ const orderSlice = createSliceWithThunk({
           state = {...initialState, loading: true}
         },
         fulfilled: (state, action) => {
+          state.error = null;
           state.status = true;
         },
         rejected: (state, action) => {
           state.error = action.payload;
+          state.loading = false;
         },
         settled: (state) => {
           state.loading = false;

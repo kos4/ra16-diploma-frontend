@@ -3,7 +3,8 @@ export function fetchCatalogCategoriesApi() {
 
   return async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_HOST + url);
+      const host = `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`;
+      const response = await fetch(host + url);
 
       if (!response.ok) {
         return rejectWithValue("Ошибка загрузки категорий каталога!");
@@ -33,7 +34,8 @@ export function fetchCatalogItemsApi() {
         newUrl = url;
       }
 
-      const response = await fetch(process.env.REACT_APP_API_HOST + newUrl);
+      const host = `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`;
+      const response = await fetch(host + newUrl);
 
       if (!response.ok) {
         return rejectWithValue("Ошибка загрузки элементов каталога!");

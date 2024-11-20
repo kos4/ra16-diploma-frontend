@@ -3,7 +3,8 @@ export function fetchProductApi() {
 
   return async (id, { rejectWithValue }) => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_HOST + url + id);
+      const host = `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`;
+      const response = await fetch(host + url + id);
 
       if (!response.ok) {
         return rejectWithValue("Ошибка загрузки товара!");

@@ -37,10 +37,12 @@ const productSlice = createSliceWithThunk({
           state = {...initialState, loading: true}
         },
         fulfilled: (state, action) => {
+          state.error = null;
           state.product = action.payload;
         },
         rejected: (state, action) => {
           state.error = action.payload;
+          state.loading = false;
         },
         settled: (state) => {
           state.loading = false;

@@ -177,6 +177,10 @@ section {
   margin-bottom: 2em;
 }
 
+.catalog-categories .nav-link {
+  cursor: pointer;
+}
+
 .catalog-item-card {
   margin-bottom: 1em;
 }
@@ -304,4 +308,16 @@ h2, .h2 {
 .btn-outline-primary:hover {
   background-color: #727e86;
   border-color: #727e86;
+}
+
+.card__image {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+}
+
+.card__name {
+  height: 48px;
+
+  overflow: hidden;
 }

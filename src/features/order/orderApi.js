@@ -6,7 +6,8 @@ export function saveOrderApi() {
 
   return async (order, { rejectWithValue, dispatch }) => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_HOST + url, {
+      const host = `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`;
+      const response = await fetch(host + url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

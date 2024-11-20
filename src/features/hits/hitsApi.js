@@ -3,7 +3,8 @@ export function fetchHitsApi() {
 
   return async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_HOST + url);
+      const host = `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`;
+      const response = await fetch(host + url);
 
       if (!response.ok) {
         return rejectWithValue("Ошибка загрузки хитов!");

@@ -1,14 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
-import Categories from "../Categories";
-import CatalogItems from "../CatalogItems";
-import Preloader from "../Preloader";
-import Error from "../Error";
 import {search, setQuerySearch} from "../../features/catalog/catalogSlice";
-
+import Catalog from "../Catalog";
 
 export default function CatalogPage () {
-  const {loading, error, categories, items, params} = useSelector(state => state.catalog);
-  const completeLoad = !loading && !error && categories && items;
+  const {params} = useSelector(state => state.catalog);
   const dispatch = useDispatch();
 
   const handlerSubmit = event => {
@@ -29,10 +24,7 @@ export default function CatalogPage () {
       <form className="catalog-search-form form-inline" onSubmit={handlerSubmit}>
         <input className="form-control" placeholder="Поиск" name="q" value={params.q} onChange={handlerChange}/>
       </form>
-      {!completeLoad && <Preloader/>}
-      {error && <Error message={error}/>}
-      <Categories completeLoad={completeLoad}/>
-      <CatalogItems completeLoad={completeLoad}/>
+      <Catalog/>
     </section>
   );
 }

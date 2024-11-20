@@ -22,14 +22,15 @@ const hitsSlice = createSliceWithThunk({
       fetchHitsApi(),
       {
         pending: (state) => {
-          state.loading = true;
-          state.products = null;
+          state = {loading: true, ...initialState};
         },
         fulfilled: (state, action) => {
+          state.error = null;
           state.products = action.payload;
         },
         rejected: (state, action) => {
           state.error = action.payload;
+          state.loading = false;
         },
         settled: (state) => {
           state.loading = false;

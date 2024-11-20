@@ -10,11 +10,11 @@ export default function Product({item, className = ''}) {
       <div className={className}>
         <img
           src={item.images[0]}
-          className="card-img-top img-fluid"
+          className="card-img-top img-fluid card__image"
           alt={item.title}
         />
           <div className="card-body">
-            <p className="card-text">{item.title}</p>
+            <p className="card-text card__name">{item.title}</p>
             <p className="card-text">
               {price}
             </p>

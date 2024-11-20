@@ -30,6 +30,9 @@ export default function ProductPage() {
     dispatch(updateCart());
     navigate("/cart.html");
   }
+  const handlerRetry = () => {
+    dispatch(fetchProduct(id));
+  };
 
   useEffect(() => {
     dispatch(fetchProduct(id));
@@ -38,7 +41,7 @@ export default function ProductPage() {
   return (
     <>
       {loading && <Preloader />}
-      {error && <Error message={error} /> }
+      {error && <Error message={error} onClickHandler={handlerRetry}/> }
       {product && (
         <section className="catalog-item">
           <h2 className="text-center">{product.title}</h2>
